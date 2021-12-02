@@ -19,15 +19,13 @@
                 <label>Message</label>
                 <textarea type="text" class="form-control" name="message" id="message" placeholder="Leave message here"
                     rows="5"></textarea>
-                <button type="submit" class="btn btn-primary">Send to me</button>
-                <button type="submit" class="btn btn-primary">Send to ALL</button>
+                <button type="button" class="btn btn-primary" id="sendToMe">Send to me</button>
+                <button type="button" class="btn btn-primary" id="sendToAll">Send to ALL</button>
             </div>
         </form>
-        <div class="form-group">
+        <div class="list">
             <h4>Messages List</h4>
-            <ul class="list-group" id="target">
-
-            </ul>
+            <div class="message" id="target"></div>
         </div>
     </div>
     <div>
