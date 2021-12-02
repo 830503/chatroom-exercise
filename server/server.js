@@ -6,13 +6,16 @@ app.use(express.static(clientPath));
 const server = http.createServer(app);
 const io = require('socket.io')(server);
 
+let counter = 0;
+
+const port = 9005;
 
 
-
-server.listen(8080,() => {
-    console.log("server running on "+8080);
+server.listen(port,() => {
+    console.log("server running on "+port);
 });
 
 io.on('connection', (socket) => {
-    console.log('someone connected');
+    counter++;
+    console.log(counter + 'someone connected');
 });
