@@ -2,7 +2,6 @@ const express = require('express');
 const http = require('http');
 const app = express();
 const clientPath = `${__dirname}/../client`;
-
 const server = http.createServer(app);
 const io = require('socket.io')(server);
 
@@ -10,7 +9,7 @@ const io = require('socket.io')(server);
 app.use(express.static(clientPath));
 
 let counter = 0;
-const users = {};
+let users = [];
 
 const port = 9005;
 
@@ -29,6 +28,13 @@ io.on('connection', (socket) => {
         counter++;
         console.log(counter + " " + socket.username +  " " + 'connected');
     });
+    
+    socket.on('userList', (username) => {
+        socket.username = username;
+        users.push({userId: socket.id, username: socket.username});
+        console.log(users);
+        socket.broadcast.emit('userList', (users));
+    })
 
     socket.on('sendToAll', (message) => {
         console.log(message);
