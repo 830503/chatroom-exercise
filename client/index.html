@@ -13,19 +13,24 @@
 
 <body>
     <div class="container-fluid">
-        <h1>Chatroom: </h1>
-        <form>
-            <div class="form-group">
-                <label>Message</label>
-                <textarea type="text" class="form-control" name="message" id="message" placeholder="Leave message here"
-                    rows="5"></textarea>
-                <button type="button" class="btn btn-primary" id="sendToMe">Send to me</button>
-                <button type="button" class="btn btn-primary" id="sendToAll">Send to ALL</button>
+        <header>
+            <h1>Chatroom</h1>
+            <a id="leave-btn" class="btn">Leave Room</a>
+        </header>
+        <main class="chat-main">
+            <div class="chat-sidebar">
+                <h3>Users</h3>
+                <ul id="users"></ul>
             </div>
-        </form>
-        <div class="list">
-            <h4>Messages List</h4>
-            <div class="message" id="target"></div>
+            <h2>Message</h2>
+            <div class="chat-message" id="target"></div>
+        </main>
+        <div class="chat-container">
+            <form class="chat-form">
+                    <input type="text" class="msg" name="message" id="msg" placeholder="Enter message here">
+                    <button type="button" class="btn btn-primary" id="sendToMe">Send to me</button>
+                    <button type="button" class="btn btn-primary" id="sendToAll">Send to ALL</button>
+            </form>
         </div>
     </div>
     <div>
