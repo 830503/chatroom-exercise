@@ -1,35 +1,35 @@
-// const { message } = require("statuses");
-
 let socket = io.connect();
 let target = document.getElementById('target');
-const username = prompt('What is your name?');
+let userLi = document.getElementById('userLi');
+let username = prompt('What is your name?');
 
 
-socket.emit('newUser', (username));
-socket.emit('userList',(username));
+// socket.emit('newUser', (username));
+socket.emit('userList', (username));
 // console.log(username);
 
-socket.on('userList', (users) => {
-    users.innerHTML = '';
-    console.log('users');
-    users.forEach(user => {
-        userLi.innerHTML += '<br>' + user.username;
-    })
-});
+
 
 socket.on('displayMessage', ({username, message}) => {
-    target.innerHTML += username + ': ' + message + '<br>';
+    target.innerHTML += '<br>' + username + ": "+ message + '<br>';
 });
 
 document.getElementById('sendToAll').addEventListener('click', function(){
     
     let message = document.getElementById('msg').value;
-    socket.emit('sendToAll', (message));
+    socket.emit('sendToAll', {username, message});
     
 })
 
 document.getElementById('sendToMe').addEventListener('click', function(){
     let message = document.getElementById('msg').value;
-    socket.emit('sendToMe', (message));
+    socket.emit('sendToMe', {username, message});
 })
 
+socket.on('userList', (users) => {
+    userLi.innerHTML = '';
+    // console.log(users);
+    users.forEach(user => {
+        userLi.innerHTML += '<br>' + user.username;
+    })
+});

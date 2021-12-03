@@ -7,9 +7,9 @@ const io = require('socket.io')(server);
 
 //set statuc folder
 app.use(express.static(clientPath));
-
-let counter = 0;
 let users = [];
+let counter = 0;
+
 
 const port = 9005;
 
@@ -20,37 +20,38 @@ server.listen(port,() => {
 
 //run when clinet connects
 io.on('connection', (socket) => {
-    
+    counter++;
 
-    socket.on('newUser', (username) => {
-        socket.username = username
-        // socket.broadcast.emit("user-connected", (username));
-        counter++;
-        console.log(counter + " " + socket.username +  " " + 'connected');
-    });
+    // socket.on('newUser', (username) => {
+    //     socket.username = username
+    //     // socket.broadcast.emit("user-connected", (username));
+    //     console.log(counter + " " + socket.username +  " " + 'connected');
+    // });
     
-    socket.on('userList', (username) => {
-        socket.username = username;
-        users.push({userId: socket.id, username: socket.username});
-        console.log(users);
-        socket.broadcast.emit('userList', (users));
-    })
+    
 
     socket.on('sendToAll', (message) => {
-        console.log(message);
+        
+        // console.log(message);
         //send to all clients---socket.broadcast.emit();
         io.emit("displayMessage", {username: socket.username, message: message});
     });
 
     socket.on('sendToMe', (message) => {
-        console.log(message);
+        
+        // console.log(message);
         //send to single client 
         socket.emit("displayMessage", {username: socket.username, message: message});
     });
 
-    socket.on('disconnet', () => {
-        
-    })
+    socket.on('userList', (username) => {
+        users.push({userId: socket.id, username: username});
+        console.log(users);
+        io.emit('userList', (users));
+        console.log(username + 'connected');
+    });
+
+    
 
 });
 
