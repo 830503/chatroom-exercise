@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link ref="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <title>Chatroom Socket</title>
 </head>
 
 <body>
-    <div class="container-fluid">
-        <header>
+    <div class="chat-container">
+        <header class="chat-header">
             <h1>Chatroom</h1>
             <a id="leave-btn" class="btn">Leave Room</a>
         </header>
@@ -25,15 +25,13 @@
             <h2>Message</h2>
             <div class="chat-message" id="target"></div>
         </main>
-        <div class="chat-container">
-            <form class="chat-form">
+        <form class="chat-form">
+            <div class="chat-form">
                     <input type="text" class="msg" name="message" id="msg" placeholder="Enter message here">
                     <button type="button" class="btn btn-primary" id="sendToMe">Send to me</button>
                     <button type="button" class="btn btn-primary" id="sendToAll">Send to ALL</button>
-            </form>
-        </div>
-    </div>
-    <div>
+            </div>
+        </form>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="script.js"></script>

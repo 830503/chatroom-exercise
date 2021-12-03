@@ -22,25 +22,11 @@ server.listen(port,() => {
 io.on('connection', (socket) => {
     counter++;
 
-    // socket.on('newUser', (username) => {
-    //     socket.username = username
-    //     // socket.broadcast.emit("user-connected", (username));
-    //     console.log(counter + " " + socket.username +  " " + 'connected');
-    // });
-    
-    
-
     socket.on('sendToAll', (message) => {
-        
-        // console.log(message);
-        //send to all clients---socket.broadcast.emit();
         io.emit("displayMessage", {username: socket.username, message: message});
     });
 
     socket.on('sendToMe', (message) => {
-        
-        // console.log(message);
-        //send to single client 
         socket.emit("displayMessage", {username: socket.username, message: message});
     });
 
